@@ -1,0 +1,29 @@
+<div class="max-w-4xl mx-auto p-6 space-y-8">
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold">💳 Subscription Plans</h1>
+    <%= link_to "← Back to Dashboard", dashboard_index_path, class: "text-blue-600 hover:underline" %>
+  </div>
+
+  <p class="text-sm text-gray-600">
+    Your current plan: <span class="font-semibold"><%= current_user.plan %></span>
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Free Plan -->
+    <div class="border rounded p-6 shadow-sm">
+      <h2 class="text-lg font-semibold mb-2">Free Plan</h2>
+      <p class="text-gray-600 mb-1">$0 / month</p>
+      <p class="text-gray-500 mb-4">Perfect for testing and getting started</p>
+      <%= button_to "Subscribe to Free Plan", "/subscribe/free", method: :post, class: "inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded" %>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="border rounded p-6 shadow-sm">
+      <h2 class="text-lg font-semibold mb-2">Pro Plan</h2>
+      <p class="text-gray-600 mb-1">$49 / month</p>
+      <p class="text-gray-500 mb-4">Includes all features and premium support</p>
+      <%= button_to "Subscribe to Pro Plan", "/subscribe/pro", method: :post, class: "inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" %>
+    </div>
+  </div>
+</div>
+

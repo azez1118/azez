@@ -1,0 +1,47 @@
+<div class="max-w-4xl mx-auto p-6 space-y-8">
+  <!-- Heading -->
+  <div>
+    <h1 class="text-3xl font-bold mb-2">👋 Welcome, <%= current_user.email %>!</h1>
+    <p class="text-gray-600 text-sm">Here you can manage your subscriptions, view reports, and more.</p>
+  </div>
+
+  <!-- Plan Info -->
+  <div class="border-t border-gray-200 pt-4">
+    <p class="text-sm">
+      <strong>Your current plan:</strong>
+      <%= current_user.plan || "Not subscribed yet" %>
+    </p>
+    <%= link_to "Change plan", pricing_path, class: "text-blue-500 underline text-sm" %>
+
+    <% if current_user.plan == "pro" %>
+      <p class="text-green-600 text-sm mt-2">Welcome, Pro user! You have access to premium features.</p>
+    <% else %>
+      <p class="text-red-600 text-sm mt-2">You are on the Free plan. Upgrade for more features.</p>
+    <% end %>
+  </div>
+
+  <!-- Tasks Section -->
+  <div>
+    <h2 class="text-2xl font-semibold mb-4">📂 Your Tasks</h2>
+
+    <% @tasks.each do |task| %>
+      <div class="bg-white border rounded p-4 shadow-sm mb-4">
+        <h3 class="font-semibold text-lg mb-1"><%= task.title %></h3>
+        <p class="text-sm text-gray-600 mb-1"><%= task.description %></p>
+        <p class="text-xs text-gray-500 mb-1">Due: <%= task.due_date || "N/A" %></p>
+        <p class="text-sm">
+          <strong>Status:</strong>
+          <%= task.completed? ? "✅ Completed" : "❌ Not done" %>
+        </p>
+        <div class="mt-2 space-x-4 text-sm">
+          <%= link_to "Edit", edit_task_path(task), class: "text-blue-600 hover:underline" %>
+          <%= link_to "Delete", task_path(task), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-500 hover:underline" %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to "+ New Task", new_task_path, class: "inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4" %>
+  </div>
+</div>
+
+
